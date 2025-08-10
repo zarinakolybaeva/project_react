@@ -1,0 +1,10 @@
+.SideBar {
+    background-color: aqua;
+    grid-area: s;
+  }
+  .item{
+    color:red;
+}
+.item.active{
+  color:gold;
+}
