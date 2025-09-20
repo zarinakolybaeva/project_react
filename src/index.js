@@ -5,9 +5,16 @@ import App from './App';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+export const dialogsData=[
+    {name:"Me",id:1},
+    {name:"Sister",id:2},
+    {name:"Guli",id:3},
+    {name:"Ami",id:4},
+    {name:"Aili",id:5}
+]
 root.render(
   <React.StrictMode>
-    <App />
+    <App  />
   </React.StrictMode>
 );
 

@@ -1,10 +1,15 @@
 .SideBar {
     background-color: aqua;
     grid-area: s;
+  .item {
+    a {
+      color: white;
+      text-decoration: none;
+
+      &.active {
+        color: gold;
+      }
+    }
   }
-  .item{
-    color:red;
-}
-.item.active{
-  color:gold;
+
 }
