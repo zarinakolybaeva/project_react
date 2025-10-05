@@ -1,7 +1,12 @@
 import s from './SideBar.module.scss'
 import {NavLink} from "react-router-dom";
 
-function SideBar(){
+// eslint-disable-next-line no-unused-vars
+import Friends from "../Friends/Friends";
+
+function SideBar(props){
+    let FriendsElements =props.state.SideBar.map((d)=><Friends name={d.name} id={d.id}/>)
+
     return (
         <nav className={s.SideBar}>
          
@@ -17,8 +22,11 @@ function SideBar(){
             <div className={s.item}>
                <NavLink to="/music"  className={({ isActive }) => `${s.link} ${isActive ? s.active : ""}` }> Music </NavLink>
             </div>
-         
-         
+            <div className={s.item}>
+                <NavLink to="/friends"  className={({ isActive }) => `${s.link} ${isActive ? s.active : ""}` }> Friends</NavLink>
+                {FriendsElements}
+            </div>
+
         </nav>
     )
 }
