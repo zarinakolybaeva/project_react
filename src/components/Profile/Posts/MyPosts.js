@@ -8,9 +8,10 @@ function MyPosts(props) {
     let newPost=React.createRef();
     let addPost=()=>{
         // let text=document.getElementById('message').value;
+        debugger;
         let text=newPost.current.value;
         props.addPost(text);
-        props.updateText('');
+
     }
 
     let onPostChange=()=>{

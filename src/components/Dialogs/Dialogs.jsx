@@ -25,9 +25,16 @@ function Dialogs(props){
 
     let dialogItems=props.state.dialogsData.map((d)=><DialogItems name={d.name} id={d.id}/>)
     let messtext=React.createRef();
-     let addMessage=()=>{
+
+    let addMessage=()=>{
+
          let text=messtext.current.value;
-         alert(text);
+         props.addMessage(text);
+
+     }
+     let onPostChange=()=>{
+         let text=messtext.current.value;
+         props.updateMessageText(text);
      }
     return (
         <div className={s.dialogs}>
@@ -39,7 +46,7 @@ function Dialogs(props){
             </div>
             <div className={s.messages}>
                 {messageItems}
-                <textarea ref={messtext}/>
+                <textarea onChange={onPostChange} ref={messtext} value={props.state.newText}/>
                 <button onClick={addMessage}>send</button>
             </div>
         </div>

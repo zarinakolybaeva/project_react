@@ -1,5 +1,7 @@
-import {rerender} from "../render";
-
+// import {rerender} from "../index";
+let rerender = () => {
+    console.log('state');
+}
 let state={
     ProfilePage : {
         postsMap: [
@@ -32,15 +34,31 @@ let state={
     },
 }
 
-export let addPost=()=>{
+export const  addPost=()=>{
+
     let newPost={id: 4, message: state.ProfilePage.newText, like: 10};
   state.ProfilePage.postsMap.push(newPost);
-
+    state.ProfilePage.newText='';
   rerender(state);
 }
 
-export let updateText=(newText)=>{
+export const addMessage=()=>{
+
+    let newMessage={id: 4, message: state.DialogsPage.newText};
+    state.DialogsPage.messagesData.push(newMessage);
+    state.DialogsPage.newText='';
+    rerender(state);
+
+}
+export const  updateText=(newText)=>{
     state.ProfilePage.newText=newText;
     rerender(state);
+}
+export const  updateMessageText=(newText)=>{
+    state.DialogsPage.newText=newText;
+    rerender(state);
+}
+export const subscribe=(observer)=>{
+    rerender=observer;
 }
 export default state;
