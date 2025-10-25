@@ -7,7 +7,7 @@ function Content(props){
     return (
         <div className={s.Content}>
             <ProfileInfo/>
-            <MyPosts postsMap={props.state.postsMap} addPost={props.addPost} newText={props.state.newText} updateText={props.updateText}/>
+            <MyPosts postsMap={props.ProfilePage.postsMap} addPost={props.addPost} newText={props.ProfilePage.newText} updateText={props.updateText}/>
         </div>
 
 

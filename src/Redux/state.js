@@ -2,6 +2,7 @@
 let rerender = () => {
     console.log('state');
 }
+
 let state={
     ProfilePage : {
         postsMap: [
@@ -23,7 +24,8 @@ let state={
             {id: 1, message: "Hello!"},
             {id: 2, message: "How are you?"},
             {id: 3, message: "I'm fine, thanks!"}
-        ]
+        ],
+        newWord:"its"
     },
     SidePage: {
         SideBar: [
@@ -39,14 +41,14 @@ export const  addPost=()=>{
     let newPost={id: 4, message: state.ProfilePage.newText, like: 10};
   state.ProfilePage.postsMap.push(newPost);
     state.ProfilePage.newText='';
-  rerender(state);
+  rerender();
 }
 
 export const addMessage=()=>{
 
-    let newMessage={id: 4, message: state.DialogsPage.newText};
+    let newMessage={id: 4, message: state.DialogsPage.newWord};
     state.DialogsPage.messagesData.push(newMessage);
-    state.DialogsPage.newText='';
+    state.DialogsPage.newWord='';
     rerender(state);
 
 }
@@ -54,8 +56,8 @@ export const  updateText=(newText)=>{
     state.ProfilePage.newText=newText;
     rerender(state);
 }
-export const  updateMessageText=(newText)=>{
-    state.DialogsPage.newText=newText;
+export const  updateMessageText=(newWord)=>{
+    state.DialogsPage.newWord=newWord;
     rerender(state);
 }
 export const subscribe=(observer)=>{

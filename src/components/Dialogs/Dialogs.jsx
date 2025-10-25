@@ -14,7 +14,7 @@ function Dialogs(props){
     //     {id:3,message:"I'm fine, thanks!"}
     // ]
 
-    let messageItems=props.state.messagesData.map((m)=><Message message={m.message}/>)
+    let messageItems=props.DialogsPage.messagesData.map((m)=><Message message={m.message}/>)
 
     // let dialogData=[
     //     {name:"Me",id:1},
@@ -23,7 +23,7 @@ function Dialogs(props){
     //     {name:"Ami",id:4}
     // ]
 
-    let dialogItems=props.state.dialogsData.map((d)=><DialogItems name={d.name} id={d.id}/>)
+    let dialogItems=props.DialogsPage.dialogsData.map((d)=><DialogItems name={d.name} id={d.id}/>)
     let messtext=React.createRef();
 
     let addMessage=()=>{
@@ -46,7 +46,7 @@ function Dialogs(props){
             </div>
             <div className={s.messages}>
                 {messageItems}
-                <textarea onChange={onPostChange} ref={messtext} value={props.state.newText}/>
+                <textarea onChange={onPostChange} ref={messtext} value={props.newWord}/>
                 <button onClick={addMessage}>send</button>
             </div>
         </div>

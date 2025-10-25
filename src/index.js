@@ -8,7 +8,7 @@ import state from "./Redux/state";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 // addPost('df');
-addMessage('fg');
+// addMessage('fg');
 let rerender = () => {
     root.render(
         <React.StrictMode>
