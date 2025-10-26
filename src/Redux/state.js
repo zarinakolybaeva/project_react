@@ -1,16 +1,16 @@
 // import {rerender} from "../index";
-let rerender = () => {
-    console.log('state');
-}
-
-let state={
-    ProfilePage : {
+// let rerender = () => {
+//     console.log('state');
+// }
+export const store={
+_state: {
+    ProfilePage: {
         postsMap: [
             {id: 1, message: "Hello!", like: 10},
             {id: 2, message: "How are you?", like: 15},
             {id: 3, message: "I'm fine, thanks!", like: 20}
         ],
-        newText:"it"
+        newText: "it"
     },
     DialogsPage: {
         dialogsData: [
@@ -25,7 +25,7 @@ let state={
             {id: 2, message: "How are you?"},
             {id: 3, message: "I'm fine, thanks!"}
         ],
-        newWord:"its"
+        newWord: "its"
     },
     SidePage: {
         SideBar: [
@@ -34,33 +34,39 @@ let state={
             {name: "Aili", id: 5}
         ],
     },
-}
+},
+    _callSubscriber () {
+        console.log('state');
+    },
+    getState(){
+    return this._state;
+},
 
-export const  addPost=()=>{
+    addPost(){
 
-    let newPost={id: 4, message: state.ProfilePage.newText, like: 10};
-  state.ProfilePage.postsMap.push(newPost);
-    state.ProfilePage.newText='';
-  rerender();
-}
+        let newPost={id: 4, message: this._state.ProfilePage.newText, like: 10};
+        this._state.ProfilePage.postsMap.push(newPost);
+        this._state.ProfilePage.newText='';
+        this. _callSubscriber(this._state);
+    },
 
-export const addMessage=()=>{
+    addMessage(){
+        let newMessage={id: 4, message: this._state.DialogsPage.newWord};
+        this._state.DialogsPage.messagesData.push(newMessage);
+        this._state.DialogsPage.newWord='';
+        this. _callSubscriber(this._state);
+    },
+    updateText(newText){
+        this._state.ProfilePage.newText=newText;
+        this. _callSubscriber(this._state);
+    },
+   updateMessageText(newWord){
+        this._state.DialogsPage.newWord=newWord;
+        this. _callSubscriber(this._state);
+    },
+    subscribe(observer){
+        this. _callSubscriber=observer;
+    }
+};
 
-    let newMessage={id: 4, message: state.DialogsPage.newWord};
-    state.DialogsPage.messagesData.push(newMessage);
-    state.DialogsPage.newWord='';
-    rerender(state);
-
-}
-export const  updateText=(newText)=>{
-    state.ProfilePage.newText=newText;
-    rerender(state);
-}
-export const  updateMessageText=(newWord)=>{
-    state.DialogsPage.newWord=newWord;
-    rerender(state);
-}
-export const subscribe=(observer)=>{
-    rerender=observer;
-}
-export default state;
+export default store;
