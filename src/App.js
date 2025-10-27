@@ -18,13 +18,19 @@ function App(props) {
     <SideBar state={props.state.SidePage} />
       <div className="wrapper_content">
           <Routes>
-              <Route path="/profile" element={<Content  ProfilePage={props.state.ProfilePage}
-                                                        addPost={props.addPost}
-                                                        updateText={props.updateText}/>}/>
-              <Route path="/dialogs/*" element={<Dialogs DialogsPage={props.state.DialogsPage}
-                                                         newWord={props.state.DialogsPage.newWord}
-                                                          addMessage={props.addMessage}
-                                                          updateMessageText={props.updateMessageText}/>}/>
+              <Route path="/profile" element={<Content  dispatch={props.dispatch}
+                                                       ProfilePage={props.state.ProfilePage}
+                                                       //  addPost={props.addPost}
+                                                       //  updateText={props.updateText}
+              />}/>
+              <Route path="/dialogs/*" element={<Dialogs
+                                                         store={props.store}
+                                                        // dispatch={props.dispatch}
+                                                        //  newWord={props.state.DialogsPage.newWord}
+                                                        //  //  addMessage={props.addMessage}
+                                                        //  DialogsPage={props.state.DialogsPage}
+                                                         //  updateMessageText={props.updateMessageText}
+              />}/>
               <Route path="/news" element={<div>news</div>}/>
               <Route path="/music" element={<div>music</div>}/>
               <Route path="/friends" element={<div>{<Friends/>}</div>}/>

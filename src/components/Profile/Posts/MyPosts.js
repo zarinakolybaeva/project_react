@@ -1,6 +1,9 @@
 import s from './MyPosts.module.scss'
 import Post from './post/Post';
 import React from "react";
+import {addPostActionCreator, updateNewPost} from "../../../Redux/state";
+
+
 
 function MyPosts(props) {
     // eslint-disable-next-line no-undef
@@ -8,15 +11,17 @@ function MyPosts(props) {
     let newPost=React.createRef();
     let addPost=()=>{
         // let text=document.getElementById('message').value;
-        debugger;
-        let text=newPost.current.value;
-        props.addPost(text);
+        // debugger;
+        // let text=newPost.current.value;
+        // props.addPost(text);
+        props.dispatch( addPostActionCreator());
 
     }
 
     let onPostChange=()=>{
         let text=newPost.current.value;
-        props.updateText(text);
+        // props.updateText(text);
+        props.dispatch(updateNewPost(text));
     }
 
     let postItems=props.postsMap.map((post)=> <Post message={post.message} like={post.like}/>)

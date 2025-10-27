@@ -5,6 +5,9 @@ import Message from "./Message/Message";
 // import {messagesData} from "../../index";
 //
 import React from "react";
+import {addMessageActionCreator, updateMessageText} from "../../Redux/state";
+
+
 function Dialogs(props){
 
     // let dialogItems=dialogsData.map((d)=> <DialogItems name={d.name} id={d.id}/>)
@@ -13,8 +16,8 @@ function Dialogs(props){
     //     {id:2,message:"How are you?"},
     //     {id:3,message:"I'm fine, thanks!"}
     // ]
-
-    let messageItems=props.DialogsPage.messagesData.map((m)=><Message message={m.message}/>)
+    let state=props.store.getState().DialogsPage;
+    let messageItems=state.messagesData.map((m)=><Message message={m.message}/>)
 
     // let dialogData=[
     //     {name:"Me",id:1},
@@ -23,18 +26,22 @@ function Dialogs(props){
     //     {name:"Ami",id:4}
     // ]
 
-    let dialogItems=props.DialogsPage.dialogsData.map((d)=><DialogItems name={d.name} id={d.id}/>)
-    let messtext=React.createRef();
+    let dialogItems=state.dialogsData.map((d)=><DialogItems name={d.name} id={d.id}/>)
+    // let messtext=React.createRef();
+    let newWord=state.newWord;
 
     let addMessage=()=>{
 
-         let text=messtext.current.value;
-         props.addMessage(text);
+         // let text=messtext.current.value;
+         // props.addMessage(text);
+        props.store.dispatch(addMessageActionCreator());
 
      }
-     let onPostChange=()=>{
-         let text=messtext.current.value;
-         props.updateMessageText(text);
+     let onPostChange=(event)=>{
+         // let text=messtext.current.value;
+         // props.updateMessageText(text);
+         let text=event.target.value;
+         props.store.dispatch( updateMessageText(text));
      }
     return (
         <div className={s.dialogs}>
@@ -46,7 +53,7 @@ function Dialogs(props){
             </div>
             <div className={s.messages}>
                 {messageItems}
-                <textarea onChange={onPostChange} ref={messtext} value={props.newWord}/>
+                <textarea onChange={onPostChange}  placeholder="enter your message" value={newWord}/>
                 <button onClick={addMessage}>send</button>
             </div>
         </div>
