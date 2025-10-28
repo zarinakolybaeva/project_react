@@ -5,7 +5,7 @@ import Message from "./Message/Message";
 // import {messagesData} from "../../index";
 //
 import React from "react";
-import {addMessageActionCreator, updateMessageText} from "../../Redux/state";
+import {addMessageActionCreator, updateMessageText} from "../../Redux/dialogs_reducer";
 
 
 function Dialogs(props){

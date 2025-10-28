@@ -2,8 +2,13 @@
 // let rerender = () => {
 //     console.log('state');
 // }
-const ADD_MESSAGE="ADD-MESSAGE";
-const UPDATE_NEW_MESSAGE="UPDATE-NEW-MESSAGE";
+import profileReducer from "./profile_reducer";
+import dialogReducer from "./dialogs_reducer";
+
+import sideBar from "../components/SideBar/SideBar";
+
+// const ADD_MESSAGE="ADD-MESSAGE";
+// const UPDATE_NEW_MESSAGE="UPDATE-NEW-MESSAGE";
 export const store= {
     _state: {
         ProfilePage: {
@@ -52,59 +57,50 @@ export const store= {
     //     this. _callSubscriber(this._state);
     // },
 
-    _addMessage(){
-        let newMessage={id: 4, message: this._state.DialogsPage.newWord};
-        this._state.DialogsPage.messagesData.push(newMessage);
-        this._state.DialogsPage.newWord='';
-        this. _callSubscriber(this._state);
-    },
+    // _addMessage(){
+    //     let newMessage={id: 4, message: this._state.DialogsPage.newWord};
+    //     this._state.DialogsPage.messagesData.push(newMessage);
+    //     this._state.DialogsPage.newWord='';
+    //     this. _callSubscriber(this._state);
+    // },
     // updateText(newText){
     //     this._state.ProfilePage.newText=newText;
     //     this. _callSubscriber(this._state);
     // },
-    _updateMessageText(newWord){
-        this._state.DialogsPage.newWord=newWord;
-        this. _callSubscriber(this._state);
-    },
+    // _updateMessageText(newWord){
+    //     this._state.DialogsPage.newWord=newWord;
+    //     this. _callSubscriber(this._state);
+    // },
     subscribe(observer) {
         this._callSubscriber = observer;
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            let newPost = {id: 4, message: this._state.ProfilePage.newText, like: 10};
-            this._state.ProfilePage.postsMap.push(newPost);
-            this._state.ProfilePage.newText = '';
-            this._callSubscriber(this._state);
-        } else if (action.type === ADD_MESSAGE) {
+        this._state.ProfilePage=profileReducer(this._state.ProfilePage,action);
+        this._state.DialogsPage=dialogReducer(this._state.DialogsPage,action);
+
+        this._callSubscriber(this._state);
+        // if (action.type === 'ADD-POST') {
+        //     let newPost = {id: 4, message: this._state.ProfilePage.newText, like: 10};
+        //     this._state.ProfilePage.postsMap.push(newPost);
+        //     this._state.ProfilePage.newText = '';
+        //     this._callSubscriber(this._state);
+        // } else if (action.type === ADD_MESSAGE) {
             // let newMessage = {id: 4, message: this._state.DialogsPage.newWord};
             // this._state.DialogsPage.messagesData.push(newMessage);
             // this._state.DialogsPage.newWord = '';
             // this._callSubscriber(this._state);
-            this._addMessage();
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.ProfilePage.newText = action.newText;
-            this._callSubscriber(this._state);
-        } else if (action.type === UPDATE_NEW_MESSAGE) {
-            // this._state.DialogsPage.newWord = action.newWord;
-            // this._callSubscriber(this._state);
-            this._updateMessageText(action.newWord);
-        }
+            // this._addMessage();
+        // } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+        //     this._state.ProfilePage.newText = action.newText;
+        //     this._callSubscriber(this._state);
+        // } else if (action.type === UPDATE_NEW_MESSAGE) {
+        //     // this._state.DialogsPage.newWord = action.newWord;
+        //     // this._callSubscriber(this._state);
+        //     this._updateMessageText(action.newWord);
+        // }
     }
 };
-export const addMessageActionCreator=()=>{
-    return {
-        type:"ADD-MESSAGE"
-    }
-}
-export let updateMessageText=(text)=>{
-    return {
-        type:"UPDATE-NEW-MESSAGE",
-        newWord:text
-    }
-}
 
-export let addPostActionCreator=()=>({type:"ADD-POST"})
 
-export let updateNewPost=(text)=>({type: "UPDATE-NEW-POST", newText: text})
 
 export default store;
